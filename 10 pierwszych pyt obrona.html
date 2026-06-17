@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Obrona – Trener 1-10</title>
+<style>
+body{font-family:Arial,sans-serif;background:#eef7ff;margin:0;padding:20px}
+.container{max-width:1000px;margin:auto}
+.card{background:white;border:2px solid #b9dcff;border-radius:16px;padding:18px;margin:15px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+h1,h2{color:#1d5fa7}
+button{background:#4da3ff;color:white;border:none;padding:10px 15px;border-radius:10px;cursor:pointer}
+button:hover{opacity:.9}
+.answer{display:none;margin-top:10px;background:#f3f9ff;padding:10px;border-radius:10px}
+#exam{font-size:20px;font-weight:bold}
+</style>
+<script>
+function toggle(id){
+let e=document.getElementById(id);
+e.style.display=e.style.display=="block"?"none":"block";
+}
+
+const oral=[
+["Istota prawa i funkcje","Prawo to zbiór norm. Funkcje: porządkowa, ochronna, kontrolna i stymulująca."],
+["Źródła prawa w Polsce","Konstytucja, ustawy, ratyfikowane umowy międzynarodowe, rozporządzenia, akty prawa miejscowego."],
+["Źródła prawa UE","Prawo pierwotne, ogólne zasady prawa UE, prawo wtórne."],
+["Przedsiębiorca i przedsiębiorstwo","Działalność: zarobkowa, zorganizowana, ciągła, we własnym imieniu."],
+["Wolność gospodarcza","Może być ograniczona ustawą i ważnym interesem publicznym."],
+["KRS i CEIDG","CEIDG dla JDG, KRS dla spółek."],
+["Podejmowanie działalności","Rejestracja, ZUS, podatki, wykonywanie, zawieszenie, zakończenie."],
+["Przedsiębiorcy zagraniczni","Oddział prowadzi działalność, przedstawicielstwo promuje."],
+["Swobody UE","Towary, osoby, usługi, przedsiębiorczość, kapitał."],
+["WTO","GATT, GATS, MFN, DSU."]
+];
+
+function losuj(){
+let x=Math.floor(Math.random()*oral.length);
+document.getElementById('exam').innerHTML=oral[x][0];
+document.getElementById('examans').innerHTML=oral[x][1];
+}
+
+function wynik(){
+let pts=0;
+document.querySelectorAll('input[data-good="1"]:checked').forEach(()=>pts++);
+let proc=Math.round((pts/20)*100);
+let oc="2";
+if(proc>=51) oc="3";
+if(proc>=70) oc="4";
+if(proc>=85) oc="5";
+document.getElementById("wynik").innerHTML=
+"Wynik: "+pts+"/20 ("+proc+"%) | Ocena: "+oc;
+}
+</script>
+</head>
+<body>
+<div class="container">
+
+<h1>🎓 Trener Obrony – Zagadnienia 1–10</h1>
+
+<div class="card">
+<h2>🎤 Tryb Egzaminatora</h2>
+<button onclick="losuj()">Losuj pytanie</button>
+<p id="exam">Kliknij przycisk</p>
+<div id="examans" class="answer"></div>
+<button onclick="toggle('examans')">Pokaż elementy odpowiedzi</button>
+</div>
+
+<div class="card">
+<h2>🧠 Fiszki</h2>
+
+<div>
+<b>1. Funkcje prawa</b><br>
+<button onclick="toggle('f1')">Pokaż</button>
+<div id="f1" class="answer">Porządkowa, ochronna, kontrolna, stymulująca.</div>
+</div><hr>
+
+<div>
+<b>2. Źródła prawa w Polsce</b><br>
+<button onclick="toggle('f2')">Pokaż</button>
+<div id="f2" class="answer">Konstytucja, ustawy, umowy międzynarodowe, rozporządzenia.</div>
+</div><hr>
+
+<div>
+<b>3. Rozporządzenie czy dyrektywa?</b><br>
+<button onclick="toggle('f3')">Pokaż</button>
+<div id="f3" class="answer">Rozporządzenie obowiązuje bezpośrednio. Dyrektywa wyznacza cel.</div>
+</div>
+</div>
+
+<div class="card">
+<h2>📝 Test 20 pytań</h2>
+
+<p>1. Najwyższe źródło prawa:</p>
+<label><input type="radio" name="a1" data-good="1">Konstytucja</label><br>
+<label><input type="radio" name="a1">Rozporządzenie</label>
+
+<p>2. CEIDG dotyczy:</p>
+<label><input type="radio" name="a2" data-good="1">JDG</label><br>
+<label><input type="radio" name="a2">Spółek akcyjnych</label>
+
+<p>3. KRS dotyczy:</p>
+<label><input type="radio" name="a3" data-good="1">Spółek</label><br>
+<label><input type="radio" name="a3">Wyłącznie osób fizycznych</label>
+
+<p>4. Najbardziej restrykcyjna reglamentacja:</p>
+<label><input type="radio" name="a4" data-good="1">Koncesja</label><br>
+<label><input type="radio" name="a4">Wpis</label>
+
+<p>5. Handel usługami WTO:</p>
+<label><input type="radio" name="a5" data-good="1">GATS</label><br>
+<label><input type="radio" name="a5">GATT</label>
+
+<p>6-20. Zaznacz prawidłowe:</p>
+<label><input type="checkbox" data-good="1">Swoboda przepływu towarów</label><br>
+<label><input type="checkbox" data-good="1">Swoboda świadczenia usług</label><br>
+<label><input type="checkbox" data-good="1">Swoboda przedsiębiorczości</label><br>
+<label><input type="checkbox" data-good="1">Swoboda przepływu pracowników</label><br>
+<label><input type="checkbox" data-good="1">Działalność jest ciągła</label><br>
+<label><input type="checkbox" data-good="1">Działalność jest zarobkowa</label><br>
+<label><input type="checkbox" data-good="1">Oddział prowadzi działalność</label><br>
+<label><input type="checkbox" data-good="1">Przedstawicielstwo promuje</label><br>
+<label><input type="checkbox" data-good="1">Rozporządzenie UE obowiązuje bezpośrednio</label><br>
+<label><input type="checkbox" data-good="1">MFN = największe uprzywilejowanie</label><br>
+<label><input type="checkbox" data-good="1">Prawo ma funkcję ochronną</label><br>
+<label><input type="checkbox" data-good="1">Prawo ma funkcję kontrolną</label><br>
+<label><input type="checkbox" data-good="1">Akty prawa miejscowego są źródłem prawa</label><br>
+<label><input type="checkbox" data-good="1">Przedsiębiorca może być osobą fizyczną</label><br>
+<label><input type="checkbox" data-good="1">Przedsiębiorstwo obejmuje składniki materialne i niematerialne</label>
+
+<br><br>
+<button onclick="wynik()">Sprawdź wynik</button>
+<h3 id="wynik"></h3>
+</div>
+
+</div>
+</body>
+</html>
